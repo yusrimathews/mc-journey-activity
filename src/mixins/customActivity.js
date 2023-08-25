@@ -21,6 +21,62 @@ export default {
       set (value) {
         this.$store.commit('updateState', { key: 'jbActivity', value });
       }
+    },
+    jbEndpoints: {
+      get () {
+        return this.$store.state.jbEndpoints;
+      },
+      set (value) {
+        this.$store.commit('updateState', { key: 'jbEndpoints', value });
+      }
+    },
+    jbTokens: {
+      get () {
+        return this.$store.state.jbTokens;
+      },
+      set (value) {
+        this.$store.commit('updateState', { key: 'jbTokens', value });
+      }
+    },
+    jbCulture: {
+      get () {
+        return this.$store.state.jbCulture;
+      },
+      set (value) {
+        this.$store.commit('updateState', { key: 'jbCulture', value });
+      }
+    },
+    jbInteractionDefaults: {
+      get () {
+        return this.$store.state.jbInteractionDefaults;
+      },
+      set (value) {
+        this.$store.commit('updateState', { key: 'jbInteractionDefaults', value });
+      }
+    },
+    jbInteraction: {
+      get () {
+        return this.$store.state.jbInteraction;
+      },
+      set (value) {
+        this.$store.commit('updateState', { key: 'jbInteraction', value });
+      }
+    },
+    jbTriggerEventDefinition: {
+      get () {
+        return this.$store.state.jbTriggerEventDefinition;
+      },
+      set (value) {
+        this.$store.commit('updateState', { key: 'jbTriggerEventDefinition', value });
+      }
+    },
+    jbSchema: {
+      get () {
+        return this.$store.state.jbSchema;
+      },
+      set (value) {
+        this.$store.commit('updateState', { key: 'jbSchema', value });
+      }
     }
   },
   methods: {
@@ -45,6 +101,11 @@ export default {
 
       this.postmonger.trigger('requestEndpoints');
     },
+    requestedEndpoints (payload) {
+      this.jbEndpoints = payload;
+      
+      this.postmonger.trigger('requestTokens');
+    },
     requestedTokens (payload) {
       this.jbTokens = payload;
 
@@ -53,11 +114,6 @@ export default {
       this.postmonger.trigger('requestInteraction');
       this.postmonger.trigger('requestTriggerEventDefinition');
       this.postmonger.trigger('requestSchema');
-    },
-    requestedEndpoints (payload) {
-      this.jbEndpoints = payload;
-
-      this.postmonger.trigger('requestTokens');
     },
     requestedCulture (payload) {
       this.jbCulture = payload;
@@ -84,8 +140,8 @@ export default {
     this.postmonger.on('initActivity', this.initActivity);
     this.postmonger.on('initActivityRunningHover', this.initActivityRunningHover);
     this.postmonger.on('initActivityRunningModal', this.initActivityRunningModal);
-    this.postmonger.on('requestedTokens', this.requestedTokens);
     this.postmonger.on('requestedEndpoints', this.requestedEndpoints);
+    this.postmonger.on('requestedTokens', this.requestedTokens);
     this.postmonger.on('requestedCulture', this.requestedCulture);
     this.postmonger.on('requestedInteractionDefaults', this.requestedInteractionDefaults);
     this.postmonger.on('requestedInteraction', this.requestedInteraction);

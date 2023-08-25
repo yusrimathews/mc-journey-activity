@@ -8,8 +8,7 @@ const ACTIVITY_BASE_URL = process.env.ACTIVITY_BASE_URL;
 const json = {
   workflowApiVersion: '1.1',
   metaData: {
-    category: 'custom',
-    configOnDrop: true
+    category: 'custom'
   },
   type: 'REST',
   lang: {

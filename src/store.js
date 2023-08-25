@@ -9,8 +9,8 @@ export const store = createStore({
         optional_text: ''
       },
       jbActivity: {},
-      jbTokens: {},
       jbEndpoints: {},
+      jbTokens: {},
       jbCulture: {},
       jbInteractionDefaults: {},
       jbInteraction: {},

@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section pt-5">
     <form>
       <div class="field">
         <label class="label">Sample Input</label>

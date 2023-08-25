@@ -1,1 +1,1 @@
-# mc-journey-activity
+# Marketing Cloud Journey Builder Activity

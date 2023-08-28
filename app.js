@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
 app.disable('x-powered-by');
 
 // Configure routes
-app.get('/config.json', require('./routes/config-json'));
+app.get('/config.json', require('./routes/config'));
 app.get('/execute', require('./routes/execute'));
 app.get('/publish', require('./routes/publish'));
 

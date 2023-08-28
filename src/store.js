@@ -1,4 +1,5 @@
 import { createStore } from 'vuex';
+// import jbSchema from './data/jbSchema';
 
 export const store = createStore({
   state () {
@@ -15,7 +16,8 @@ export const store = createStore({
       jbInteractionDefaults: {},
       jbInteraction: {},
       jbTriggerEventDefinition: {},
-      jbSchema: []
+      // jbSchema: jbSchema
+      jbSchema: {}
     }
   },
   mutations: {

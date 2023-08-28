@@ -4,16 +4,26 @@
       <div class="field">
         <label class="label">Sample Input</label>
         <div class="control">
-          <input class="input is-small" type="text" v-model="sample_input" />
+          <input class="input is-small" type="text" v-model="sample_input" :class="[ this.v$.sample_input.$errors.length ? 'is-danger' : '' ]" />
         </div>
       </div>
 
       <div class="field">
         <label class="label">Dynamic Select</label>
         <div class="control">
-          <div class="select is-small is-fullwidth is-loading">
-            <select disabled v-model="dynamic_select">
-              <option selected disabled hidden value="">Loading...</option>
+          <div class="select is-small is-fullwidth" :class="[
+            this.v$.dynamic_select.$errors.length ? 'is-danger' : '',
+            !dynamic_options ? 'is-loading' : ''
+          ]">
+            <select v-model="dynamic_select" :disabled="!dynamic_options.length">
+
+              <option selected disabled hidden value="" v-if="!dynamic_options">Loading...</option>
+              <option selected disabled hidden value="" v-if="!dynamic_options.length">No fields available...</option>
+              <option selected disabled hidden value="" v-if="dynamic_options.length">Select a field...</option>
+
+              <option v-for="option in dynamic_options" :value="option.key" :key="option.key">
+                {{ option.name }}
+              </option>
             </select>
           </div>
         </div>
@@ -40,34 +50,24 @@
       <br />
       <div class="tags has-addons mb-0">
         <span class="tag">Debug</span>
-        <span class="tag is-warning is-light">Data</span>
-      </div>
-      <pre>{{ this.$data }}</pre>
-
-      <br />
-      <div class="tags has-addons mb-0">
-        <span class="tag">Debug</span>
         <span class="tag is-warning is-light">State</span>
       </div>
-      <pre>{{ this.$store.state }}</pre>
+      <pre>{{ [this.$data, this.$store.state] }}</pre>
     </form>
   </section>
 </template>
 
-<style>
-  @import 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css';
-</style>
-
 <script>
 import customActivity from '@/mixins/customActivity';
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 
 export default {
   name: 'Main',
   mixins: [customActivity],
-  data: () => ({
-    sample_input_error: false,
-    dynamic_select_error: false
-  }),
+  setup () {
+    return { v$: useVuelidate() }
+  },
   computed: {
     sample_input: {
       get () {
@@ -75,6 +75,7 @@ export default {
       },
       set (value) {
         this.$store.commit('updateConfigModal', { key: 'sample_input', value });
+        this.v$.sample_input.$touch();
       }
     },
     dynamic_select: {
@@ -83,6 +84,19 @@ export default {
       },
       set (value) {
         this.$store.commit('updateConfigModal', { key: 'dynamic_select', value });
+        this.v$.dynamic_select.$touch();
+      }
+    },
+    dynamic_options () {
+      var schema_array = this.$store.state.jbSchema.schema || false;
+      var types_array = ['Text', 'EmailAddress', 'Phone', 'Date'];
+
+      if (schema_array) {
+        return schema_array.filter(function (object) {
+          return types_array.includes(object.type);
+        });
+      } else {
+        return schema_array;
       }
     },
     optional_text: {
@@ -94,12 +108,26 @@ export default {
       }
     }
   },
+  validations () {
+    return {
+      sample_input: { required },
+      dynamic_select: { required }
+    }
+  },
   methods: {
     formCancel (element) {
       element.preventDefault();
     },
-    formSave (element) {
+    async formSave (element) {
       element.preventDefault();
+
+      const result = await this.v$.$validate();
+
+      if (!result) {
+        console.log('error', this.v$.$errors);
+      } else {
+        console.log('success');
+      }
     }
   }
 }

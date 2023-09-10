@@ -84,6 +84,12 @@ export default {
       this.jbActivity = payload;
 
       this.postmonger.trigger('requestEndpoints');
+      this.postmonger.trigger('requestTokens');
+      this.postmonger.trigger('requestCulture');
+      this.postmonger.trigger('requestInteractionDefaults');
+      this.postmonger.trigger('requestInteraction');
+      this.postmonger.trigger('requestTriggerEventDefinition');
+      this.postmonger.trigger('requestSchema');
 
       if (payload.metaData.isConfigured) {
         this.configModal = payload.metaData.configModal;
@@ -103,17 +109,9 @@ export default {
     },
     requestedEndpoints (payload) {
       this.jbEndpoints = payload;
-      
-      this.postmonger.trigger('requestTokens');
     },
     requestedTokens (payload) {
       this.jbTokens = payload;
-
-      this.postmonger.trigger('requestCulture');
-      this.postmonger.trigger('requestInteractionDefaults');
-      this.postmonger.trigger('requestInteraction');
-      this.postmonger.trigger('requestTriggerEventDefinition');
-      this.postmonger.trigger('requestSchema');
     },
     requestedCulture (payload) {
       this.jbCulture = payload;

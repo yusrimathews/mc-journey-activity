@@ -1,10 +1,14 @@
+// Required environment variables
 const ACTIVITY_NAME = process.env.ACTIVITY_NAME;
+const ACTIVITY_BASE_URL = process.env.ACTIVITY_BASE_URL.replace(/\/+$/, '');
+
+// Other environment variables
 const ACTIVITY_TIMEOUT = process.env.ACTIVITY_TIMEOUT || 20000;
 const ACTIVITY_RETRY_COUNT = process.env.ACTIVITY_RETRY_COUNT || 0;
 const ACTIVITY_RETRY_DELAY = process.env.ACTIVITY_RETRY_DELAY || 1000;
 const ACTIVITY_CONCURRENT_REQUESTS = process.env.ACTIVITY_CONCURRENT_REQUESTS || 5;
-const ACTIVITY_BASE_URL = process.env.ACTIVITY_BASE_URL;
 
+// Configuration definition
 const json = {
   workflowApiVersion: '1.1',
   metaData: {

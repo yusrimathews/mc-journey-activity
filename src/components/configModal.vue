@@ -52,7 +52,7 @@
         <span class="tag">Debug</span>
         <span class="tag is-warning is-light">State</span>
       </div>
-      <pre>{{ [this.$data, this.$store.state] }}</pre>
+      <pre>{{ this.$store.state }}</pre>
     </form>
   </section>
 </template>

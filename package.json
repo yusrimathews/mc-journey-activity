@@ -1,7 +1,7 @@
 {
   "name": "mc-journey-activity",
   "version": "1.0.0",
-  "description": "Fork this repo and create your own Marketing Cloud Journey Builder Activity",
+  "description": "Create your own Marketing Cloud Journey Builder Activity",
   "main": "app.js",
   "scripts": {
     "dev": "vue-cli-service serve",

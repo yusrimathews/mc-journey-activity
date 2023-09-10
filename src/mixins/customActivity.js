@@ -127,6 +127,9 @@ export default {
     },
     requestedSchema (payload) {
       this.jbSchema = payload;
+    },
+    clickedNext (payload) {
+      console.log('updateActivity', payload);
     }
   },
   created () {
@@ -145,5 +148,6 @@ export default {
     this.postmonger.on('requestedInteraction', this.requestedInteraction);
     this.postmonger.on('requestedTriggerEventDefinition', this.requestedTriggerEventDefinition);
     this.postmonger.on('requestedSchema', this.requestedSchema);
+    this.postmonger.on('clickedNext', this.clickedNext);
   }
 }

@@ -1,5 +1,8 @@
 import Postmonger from 'postmonger';
 
+// Required environment variable
+const ACTIVITY_BASE_URL = process.env.ACTIVITY_BASE_URL.replace(/\/+$/, '');
+
 export default {
   components: { Postmonger },
   computed: {
@@ -145,6 +148,12 @@ export default {
                 { dynamic_select: this.$store.state.configModal.dynamic_select },
                 { optional_text: this.$store.state.configModal.optional_text }
               ]
+            }
+          },
+          configurationArguments: {
+            ...this.$store.state.jbActivity.configurationArguments,
+            validate: {
+              url: `${ACTIVITY_BASE_URL}/validate`
             }
           }
         });

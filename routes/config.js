@@ -35,9 +35,6 @@ const json = {
   configurationArguments: {
     publish: {
       url: `${ACTIVITY_BASE_URL}/publish`
-    },
-    validate: {
-      url: `${ACTIVITY_BASE_URL}/validate`
     }
   },
   userInterfaces: {

@@ -4,7 +4,7 @@ require('dotenv').config();
 const ACTIVITY_NAME = process.env.ACTIVITY_NAME;
 const ACTIVITY_BASE_URL = process.env.ACTIVITY_BASE_URL.replace(/\/+$/, '');
 
-// Other environment variables
+// Optional environment variables
 const ACTIVITY_TIMEOUT = process.env.ACTIVITY_TIMEOUT || 20000;
 const ACTIVITY_RETRY_COUNT = process.env.ACTIVITY_RETRY_COUNT || 0;
 const ACTIVITY_RETRY_DELAY = process.env.ACTIVITY_RETRY_DELAY || 1000;

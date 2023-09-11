@@ -24,6 +24,7 @@ app.disable('x-powered-by');
 app.get('/config.json', require('./routes/config'));
 app.get('/execute', require('./routes/execute'));
 app.get('/publish', require('./routes/publish'));
+app.get('/validate', require('./routes/validate'));
 
 // Configure routes to static files
 app.use(express.static(`${__dirname}/dist/`));

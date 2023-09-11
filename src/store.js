@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 // import jbSchema from './data/jbSchema';
+// import jbActivity from './data/jbActivity';
 
 export const store = createStore({
   state () {
@@ -9,6 +10,7 @@ export const store = createStore({
         dynamic_select: '',
         optional_text: ''
       },
+      // jbActivity: jbActivity,
       jbActivity: {},
       jbEndpoints: {},
       jbTokens: {},

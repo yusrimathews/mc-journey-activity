@@ -138,22 +138,17 @@ export default {
           ...this.$store.state.jbActivity,
           metaData: {
             ...this.$store.state.jbActivity.metaData,
-            configModal: this.$store.state.configModal
+            configModal: this.$store.state.configModal,
+            isConfigured: true
           },
           arguments: {
             ...this.$store.state.jbActivity.arguments,
             execute: {
               ...this.$store.state.jbActivity.arguments.execute,
               inArguments: [
-                {
-                  sample_input: this.$store.state.configModal.sample_input
-                },
-                {
-                  dynamic_select: this.$store.state.configModal.dynamic_select
-                },
-                {
-                  optional_text: this.$store.state.configModal.optional_text
-                }
+                { sample_input: this.$store.state.configModal.sample_input },
+                { dynamic_select: this.$store.state.configModal.dynamic_select },
+                { optional_text: this.$store.state.configModal.optional_text }
               ]
             }
           }

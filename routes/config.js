@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Required environment variables
 const ACTIVITY_NAME = process.env.ACTIVITY_NAME;
 const ACTIVITY_BASE_URL = process.env.ACTIVITY_BASE_URL.replace(/\/+$/, '');

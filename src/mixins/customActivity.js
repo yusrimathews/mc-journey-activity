@@ -2,9 +2,6 @@ import Postmonger from 'postmonger';
 
 export default {
   components: { Postmonger },
-  data: () => ({
-    postmonger: null
-  }),
   computed: {
     configModal: {
       get () {
@@ -94,8 +91,6 @@ export default {
       if (payload.metaData.isConfigured) {
         this.configModal = payload.metaData.configModal;
       }
-
-      this.postmonger.trigger('updateButton', { enabled: false });
     },
     initActivityRunningHover (payload) {
       this.jbActivity = payload;

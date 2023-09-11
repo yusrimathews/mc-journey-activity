@@ -117,17 +117,13 @@ export default {
   methods: {
     formCancel (element) {
       element.preventDefault();
+
+      this.destroy();
     },
-    async formSave (element) {
+    formSave (element) {
       element.preventDefault();
 
-      const result = await this.v$.$validate();
-
-      if (!result) {
-        console.log('error', this.v$.$errors);
-      } else {
-        console.log('success');
-      }
+      this.clickedNext();
     }
   }
 }

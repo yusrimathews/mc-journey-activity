@@ -128,8 +128,40 @@ export default {
     requestedSchema (payload) {
       this.jbSchema = payload;
     },
-    clickedNext (payload) {
-      console.log('updateActivity', payload);
+    async clickedNext () {
+      const result = await this.v$.$validate();
+
+      if (!result) {
+        this.postmonger.trigger('ready');
+      } else {
+        this.postmonger.trigger('updateActivity', {
+          ...this.$store.state.jbActivity,
+          metaData: {
+            ...this.$store.state.jbActivity.metaData,
+            configModal: this.$store.state.configModal
+          },
+          arguments: {
+            ...this.$store.state.jbActivity.arguments,
+            execute: {
+              ...this.$store.state.jbActivity.arguments.execute,
+              inArguments: [
+                {
+                  sample_input: this.$store.state.configModal.sample_input
+                },
+                {
+                  dynamic_select: this.$store.state.configModal.dynamic_select
+                },
+                {
+                  optional_text: this.$store.state.configModal.optional_text
+                }
+              ]
+            }
+          }
+        });
+      }
+    },
+    destroy () {
+      this.postmonger.trigger('destroy');
     }
   },
   created () {

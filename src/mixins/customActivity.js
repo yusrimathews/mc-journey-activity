@@ -1,7 +1,7 @@
 import Postmonger from 'postmonger';
 
 // Required environment variable
-const ACTIVITY_BASE_URL = process.env.ACTIVITY_BASE_URL.replace(/\/+$/, '');
+const VUE_APP_URL = process.env.VUE_APP_URL.replace(/\/+$/, '');
 
 export default {
   components: { Postmonger },
@@ -153,7 +153,7 @@ export default {
           configurationArguments: {
             ...this.$store.state.jbActivity.configurationArguments,
             validate: {
-              url: `${ACTIVITY_BASE_URL}/validate`
+              url: `${VUE_APP_URL}/validate`
             }
           }
         });

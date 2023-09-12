@@ -1,14 +1,14 @@
 require('dotenv').config();
 
 // Required environment variables
-const ACTIVITY_NAME = process.env.ACTIVITY_NAME;
-const ACTIVITY_BASE_URL = process.env.ACTIVITY_BASE_URL.replace(/\/+$/, '');
+const VUE_APP_TITLE = process.env.VUE_APP_TITLE;
+const VUE_APP_URL = process.env.VUE_APP_URL.replace(/\/+$/, '');
 
 // Optional environment variables
-const ACTIVITY_TIMEOUT = process.env.ACTIVITY_TIMEOUT || 20000;
-const ACTIVITY_RETRY_COUNT = process.env.ACTIVITY_RETRY_COUNT || 0;
-const ACTIVITY_RETRY_DELAY = process.env.ACTIVITY_RETRY_DELAY || 1000;
-const ACTIVITY_CONCURRENT_REQUESTS = process.env.ACTIVITY_CONCURRENT_REQUESTS || 5;
+const JB_TIMEOUT = process.env.JB_TIMEOUT || 20000;
+const JB_RETRY_COUNT = process.env.JB_RETRY_COUNT || 0;
+const JB_RETRY_DELAY = process.env.JB_RETRY_DELAY || 1000;
+const JB_CONCURRENT_REQUESTS = process.env.JB_CONCURRENT_REQUESTS || 5;
 
 // Configuration definition
 const json = {
@@ -19,33 +19,33 @@ const json = {
   type: 'REST',
   lang: {
     'en-US': {
-      name: ACTIVITY_NAME,
+      name: VUE_APP_TITLE,
       description: 'Sample Marketing Cloud Journey Builder Activity'
     }
   },
   arguments: {
     execute: {
-      timeout: ACTIVITY_TIMEOUT,
-      retryCount: ACTIVITY_RETRY_COUNT,
-      retryDelay: ACTIVITY_RETRY_DELAY,
-      concurrentRequests : ACTIVITY_CONCURRENT_REQUESTS,
-      url: `${ACTIVITY_BASE_URL}/execute`
+      timeout: JB_TIMEOUT,
+      retryCount: JB_RETRY_COUNT,
+      retryDelay: JB_RETRY_DELAY,
+      concurrentRequests : JB_CONCURRENT_REQUESTS,
+      url: `${VUE_APP_URL}/execute`
     }
   },
   configurationArguments: {
     publish: {
-      url: `${ACTIVITY_BASE_URL}/publish`
+      url: `${VUE_APP_URL}/publish`
     }
   },
   userInterfaces: {
     configModal: {
-      url: `${ACTIVITY_BASE_URL}/`
+      url: `${VUE_APP_URL}/`
     },
     runningHover: {
-      url: `${ACTIVITY_BASE_URL}/hover`
+      url: `${VUE_APP_URL}/hover`
     },
     runningModal: {
-      url: `${ACTIVITY_BASE_URL}/modal`
+      url: `${VUE_APP_URL}/modal`
     }
   }
 }

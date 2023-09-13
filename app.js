@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const history = require('connect-history-api-fallback');
 const app = express();
+const logger = require('./lib/logger');
 
 // Configure parsers
 app.use(cors());
@@ -35,5 +36,5 @@ app.use(express.static(`${__dirname}/dist/`));
 const port = process.env.PORT || 8081;
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  logger.info(`[app.js] Listening on port ${port}`);
 });

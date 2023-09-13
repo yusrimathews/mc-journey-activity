@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 // Required environment variables
 const VUE_APP_TITLE = process.env.VUE_APP_TITLE;
 const VUE_APP_URL = process.env.VUE_APP_URL.replace(/\/+$/, '');

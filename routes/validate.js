@@ -1,13 +1,12 @@
+const logger = require('../lib/logger');
+
 module.exports = (req, res) => {
   try {
-    const body = req.body;
-    const params = req.params;
-
-    console.log(body, params);
+    logger.info(`[validate.js] ${JSON.stringify(req)}`);
 
     res.json({ success: true });
   } catch (error) {
-    console.log(error);
+    logger.error(`[validate.js] ${JSON.stringify(error)}`);
 
     res.status(500).json({ error: true });
   }

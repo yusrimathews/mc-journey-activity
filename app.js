@@ -3,14 +3,17 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const logger = require('./lib/logger');
+const cors = require('cors');
+const history = require('connect-history-api-fallback');
+const nocache = require('nocache');
 
 // Optional environment variables
 const port = process.env.PORT || 8081;
 
 // Configure middleware & parsers
-app.use(require('cors'));
-app.use(require('connect-history-api-fallback'));
-app.use(require('nocache'));
+app.use(cors());
+app.use(history());
+app.use(nocache());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(require('body-parser').raw({

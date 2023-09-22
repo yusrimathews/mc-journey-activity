@@ -1,4 +1,3 @@
-const mongodb = require('../lib/mongodb');
 const logger = require('../lib/logger');
 
 module.exports = (req, res) => {

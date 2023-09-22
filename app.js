@@ -10,18 +10,18 @@ const logger = require('./lib/logger');
 app.use(cors());
 app.use(history());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(require('body-parser').raw({
-  type: 'application/jwt'
-}));
+// app.use(express.urlencoded({ extended: true }));
+// app.use(require('body-parser').raw({
+//   type: 'application/jwt'
+// }));
 
 // Configure headers
-app.use(function (req, res, next) {
-  res.set('Cache-control', 'no-store');
-  res.set('Pragma', 'no-cache');
-  next();
-});
-app.disable('x-powered-by');
+// app.use(function (req, res, next) {
+//   res.set('Cache-control', 'no-store');
+//   res.set('Pragma', 'no-cache');
+//   next();
+// });
+// app.disable('x-powered-by');
 
 // Configure routes
 app.get('/config.json', require('./routes/config'));

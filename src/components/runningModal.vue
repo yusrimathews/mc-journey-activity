@@ -1,8 +1,5 @@
 <template>
-  <section class="section pt-5">
-    <p>Modal</p>
-
-    <br />
+  <section class="section py-0 px-0">
     <div class="tags has-addons mb-0">
       <span class="tag">Debug</span>
       <span class="tag is-warning is-light">State</span>

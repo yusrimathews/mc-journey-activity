@@ -37,16 +37,6 @@
         </div>
       </div>
 
-      <div class="field is-grouped is-grouped-centered">
-        <div class="control">
-          <button class="button is-small is-light" v-on:click="formCancel">Cancel</button>
-        </div>
-
-        <div class="control">
-          <button class="button is-small is-primary" v-on:click="formSave">Save</button>
-        </div>
-      </div>
-
       <br />
       <div class="tags has-addons mb-0">
         <span class="tag">Debug</span>
@@ -116,18 +106,6 @@ export default {
     return {
       sample_input: { required },
       dynamic_select: { required }
-    }
-  },
-  methods: {
-    formCancel (element) {
-      element.preventDefault();
-
-      this.destroy();
-    },
-    formSave (element) {
-      element.preventDefault();
-
-      this.clickedNext();
     }
   }
 }

@@ -85,12 +85,13 @@ export default {
 
       this.jbActivity = payload;
 
-      this.postmonger.trigger('requestEndpoints');
-      this.postmonger.trigger('requestTokens');
-      this.postmonger.trigger('requestCulture');
-      this.postmonger.trigger('requestInteractionDefaults');
-      this.postmonger.trigger('requestInteraction');
-      this.postmonger.trigger('requestTriggerEventDefinition');
+      // Optional Postmonger trigger request
+      // this.postmonger.trigger('requestEndpoints');
+      // this.postmonger.trigger('requestTokens');
+      // this.postmonger.trigger('requestCulture');
+      // this.postmonger.trigger('requestInteractionDefaults');
+      // this.postmonger.trigger('requestInteraction');
+      // this.postmonger.trigger('requestTriggerEventDefinition');
       this.postmonger.trigger('requestSchema');
 
       if (payload.metaData.isConfigured) {
@@ -101,11 +102,19 @@ export default {
       this.$log.debug(`initActivityRunningHover : ${JSON.stringify(payload)}`);
 
       this.jbActivity = payload;
+
+      if (payload.metaData.isConfigured) {
+        this.configModal = payload.metaData.configModal;
+      }
     },
     initActivityRunningModal (payload) {
       this.$log.debug(`initActivityRunningModal : ${JSON.stringify(payload)}`);
 
       this.jbActivity = payload;
+
+      if (payload.metaData.isConfigured) {
+        this.configModal = payload.metaData.configModal;
+      }
     },
     requestedEndpoints (payload) {
       this.$log.debug(`requestedEndpoints : ${JSON.stringify(payload)}`);

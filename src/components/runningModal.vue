@@ -7,12 +7,15 @@
       <span class="tag">Debug</span>
       <span class="tag is-warning is-light">State</span>
     </div>
-    <pre>{{ [this.$data, this.$store.state] }}</pre>
+    <pre>{{ this.$store.state }}</pre>
   </section>
 </template>
 
 <script>
+import customActivity from '@/mixins/customActivity';
+
 export default {
-  name: 'Modal'
+  name: 'Modal',
+  mixins: [customActivity]
 }
 </script>

@@ -81,6 +81,8 @@ export default {
   },
   methods: {
     initActivity (payload) {
+      this.$log.debug(`initActivity : ${JSON.stringify(payload)}`);
+
       this.jbActivity = payload;
 
       this.postmonger.trigger('requestEndpoints');
@@ -96,34 +98,48 @@ export default {
       }
     },
     initActivityRunningHover (payload) {
-      this.jbActivity = payload;
+      this.$log.debug(`initActivityRunningHover : ${JSON.stringify(payload)}`);
 
-      this.postmonger.trigger('requestEndpoints');
+      this.jbActivity = payload;
     },
     initActivityRunningModal (payload) {
-      this.jbActivity = payload;
+      this.$log.debug(`initActivityRunningModal : ${JSON.stringify(payload)}`);
 
-      this.postmonger.trigger('requestEndpoints');
+      this.jbActivity = payload;
     },
     requestedEndpoints (payload) {
+      this.$log.debug(`requestedEndpoints : ${JSON.stringify(payload)}`);
+
       this.jbEndpoints = payload;
     },
     requestedTokens (payload) {
+      this.$log.debug(`requestedTokens : ${JSON.stringify(payload)}`);
+
       this.jbTokens = payload;
     },
     requestedCulture (payload) {
+      this.$log.debug(`requestedCulture : ${JSON.stringify(payload)}`);
+
       this.jbCulture = payload;
     },
     requestedInteractionDefaults (payload) {
+      this.$log.debug(`requestedInteractionDefaults : ${JSON.stringify(payload)}`);
+
       this.jbInteractionDefaults = payload;
     },
     requestedInteraction (payload) {
+      this.$log.debug(`requestedInteraction : ${JSON.stringify(payload)}`);
+
       this.jbInteraction = payload;
     },
     requestedTriggerEventDefinition (payload) {
+      this.$log.debug(`requestedTriggerEventDefinition : ${JSON.stringify(payload)}`);
+
       this.jbTriggerEventDefinition = payload;
     },
     requestedSchema (payload) {
+      this.$log.debug(`requestedSchema : ${JSON.stringify(payload)}`);
+
       this.jbSchema = payload;
     },
     async clickedNext () {

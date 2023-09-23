@@ -26,7 +26,7 @@ const json = {
       timeout: JB_TIMEOUT,
       retryCount: JB_RETRY_COUNT,
       retryDelay: JB_RETRY_DELAY,
-      concurrentRequests : JB_CONCURRENT_REQUESTS,
+      concurrentRequests: JB_CONCURRENT_REQUESTS,
       url: `${VUE_APP_URL}/execute`
     }
   },

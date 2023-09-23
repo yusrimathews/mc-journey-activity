@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     initActivity (payload) {
-      this.$log.debug(`initActivity : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] initActivity | ${JSON.stringify(payload)}`);
 
       this.jbActivity = payload;
 
@@ -99,7 +99,7 @@ export default {
       }
     },
     initActivityRunningHover (payload) {
-      this.$log.debug(`initActivityRunningHover : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] initActivityRunningHover | ${JSON.stringify(payload)}`);
 
       this.jbActivity = payload;
 
@@ -108,7 +108,7 @@ export default {
       }
     },
     initActivityRunningModal (payload) {
-      this.$log.debug(`initActivityRunningModal : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] initActivityRunningModal | ${JSON.stringify(payload)}`);
 
       this.jbActivity = payload;
 
@@ -117,37 +117,37 @@ export default {
       }
     },
     requestedEndpoints (payload) {
-      this.$log.debug(`requestedEndpoints : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] requestedEndpoints | ${JSON.stringify(payload)}`);
 
       this.jbEndpoints = payload;
     },
     requestedTokens (payload) {
-      this.$log.debug(`requestedTokens : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] requestedTokens | ${JSON.stringify(payload)}`);
 
       this.jbTokens = payload;
     },
     requestedCulture (payload) {
-      this.$log.debug(`requestedCulture : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] requestedCulture | ${JSON.stringify(payload)}`);
 
       this.jbCulture = payload;
     },
     requestedInteractionDefaults (payload) {
-      this.$log.debug(`requestedInteractionDefaults : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] requestedInteractionDefaults | ${JSON.stringify(payload)}`);
 
       this.jbInteractionDefaults = payload;
     },
     requestedInteraction (payload) {
-      this.$log.debug(`requestedInteraction : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] requestedInteraction | ${JSON.stringify(payload)}`);
 
       this.jbInteraction = payload;
     },
     requestedTriggerEventDefinition (payload) {
-      this.$log.debug(`requestedTriggerEventDefinition : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] requestedTriggerEventDefinition | ${JSON.stringify(payload)}`);
 
       this.jbTriggerEventDefinition = payload;
     },
     requestedSchema (payload) {
-      this.$log.debug(`requestedSchema : ${JSON.stringify(payload)}`);
+      this.$log.debug(`[customActivity.js] requestedSchema | ${JSON.stringify(payload)}`);
 
       this.jbSchema = payload;
     },
@@ -186,12 +186,16 @@ export default {
     },
     destroy () {
       this.postmonger.trigger('destroy');
+
+      this.$log.info('[customActivity.js] destroy');
     }
   },
   created () {
     this.postmonger = new Postmonger.Session();
 
     this.postmonger.trigger('ready');
+
+    this.$log.info('[customActivity.js] init');
   },
   beforeMount () {
     this.postmonger.on('initActivity', this.initActivity);

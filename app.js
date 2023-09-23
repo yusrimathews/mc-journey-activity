@@ -33,8 +33,8 @@ app.use(express.static(`${__dirname}/dist/`));
 // Start server
 app.listen(port, (error) => {
   if (error) {
-    logger.error('[app.js] error :', error);
+    logger.error('[app.js] error |', error);
   } else {
-    logger.info(`[app.js] success : ${port}`);
+    logger.info(`[app.js] success | ${port}`);
   }
 });

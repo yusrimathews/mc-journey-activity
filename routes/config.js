@@ -45,6 +45,38 @@ const json = {
     runningModal: {
       url: `${VUE_APP_URL}/modal`
     }
+  },
+  schema: {
+    arguments: {
+      execute: {
+        inArguments: [{
+          sample_input: {
+            dataType: 'text',
+            direction: 'in'
+          },
+          dynamic_select: {
+            dataType: 'text',
+            direction: 'in'
+          },
+          optional_text: {
+            dataType: 'text',
+            direction: 'in'
+          }
+        }],
+        outArguments: [{
+          request_id: {
+            dataType: 'text',
+            direction: 'out',
+            access: 'hidden'
+          },
+          activity_id: {
+            dataType: 'text',
+            direction: 'out',
+            access: 'visible'
+          }
+        }]
+      }
+    }
   }
 }
 

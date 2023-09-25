@@ -157,22 +157,27 @@ export default {
       if (!result) {
         this.postmonger.trigger('ready');
       } else {
+        const configModal = this.$store.state.configModal;
+        const inArguments = [];
+
+        Object.keys(configModal).forEach(key => {
+          inArguments.push({
+            [key]: configModal[key]
+          });
+        });
+
         this.postmonger.trigger('updateActivity', {
           ...this.$store.state.jbActivity,
           metaData: {
             ...this.$store.state.jbActivity.metaData,
-            configModal: this.$store.state.configModal,
+            configModal: configModal,
             isConfigured: true
           },
           arguments: {
             ...this.$store.state.jbActivity.arguments,
             execute: {
               ...this.$store.state.jbActivity.arguments.execute,
-              inArguments: [
-                { sample_input: this.$store.state.configModal.sample_input },
-                { dynamic_select: this.$store.state.configModal.dynamic_select },
-                { optional_text: this.$store.state.configModal.optional_text }
-              ]
+              inArguments: inArguments
             }
           },
           configurationArguments: {

@@ -83,9 +83,10 @@ export default {
 
       if (schema_array) {
         return schema_array.filter(function (object) {
-          var bind = object.key.split('.');
+          var key_format = object.key.replace(/[{}/"]/g, '');
+          var key_split = key_format.split('.');
 
-          object.key = `{{${bind[0]}.${bind[1]}."${bind[2]}"}}`;
+          object.key = `{{${key_split[0]}.${key_split[1]}."${key_split[2]}"}}`;
 
           return types_array.includes(object.type);
         });

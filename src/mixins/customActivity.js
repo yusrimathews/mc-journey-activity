@@ -87,7 +87,7 @@ export default {
 
       // Optional Postmonger trigger request
       // this.postmonger.trigger('requestEndpoints');
-      // this.postmonger.trigger('requestTokens');
+      this.postmonger.trigger('requestTokens');
       // this.postmonger.trigger('requestCulture');
       // this.postmonger.trigger('requestInteractionDefaults');
       // this.postmonger.trigger('requestInteraction');

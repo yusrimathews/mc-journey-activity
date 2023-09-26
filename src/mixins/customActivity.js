@@ -86,14 +86,16 @@ export default {
 
       this.jbActivity = payload;
 
-      // Optional Postmonger trigger request
-      // this.postmonger.trigger('requestEndpoints');
+      // Required Postmonger trigger requests
       this.postmonger.trigger('requestTokens');
+      this.postmonger.trigger('requestSchema');
+
+      // Optional Postmonger trigger requests
+      // this.postmonger.trigger('requestEndpoints');
       // this.postmonger.trigger('requestCulture');
       // this.postmonger.trigger('requestInteractionDefaults');
       // this.postmonger.trigger('requestInteraction');
       // this.postmonger.trigger('requestTriggerEventDefinition');
-      this.postmonger.trigger('requestSchema');
 
       if (payload.metaData.isConfigured) {
         this.configModal = payload.metaData.configModal;

@@ -27,14 +27,14 @@ const json = {
       retryCount: JB_RETRY_COUNT,
       retryDelay: JB_RETRY_DELAY,
       concurrentRequests: JB_CONCURRENT_REQUESTS,
-      url: `${VUE_APP_URL}/execute`
+      // url: `${VUE_APP_URL}/execute`
     }
   },
-  configurationArguments: {
-    publish: {
-      url: `${VUE_APP_URL}/publish`
-    }
-  },
+  // configurationArguments: {
+  //   publish: {
+  //     url: `${VUE_APP_URL}/publish`
+  //   }
+  // },
   userInterfaces: {
     configModal: {
       url: `${VUE_APP_URL}/`

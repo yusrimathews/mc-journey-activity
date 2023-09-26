@@ -24,6 +24,7 @@
     "mongodb": "^6.0.0",
     "nocache": "^4.0.0",
     "postmonger": "^0.0.16",
+    "querystring": "^0.2.1",
     "vue": "^3.3.4",
     "vue-logger-plugin": "^2.2.3",
     "vue-router": "^4.2.4",

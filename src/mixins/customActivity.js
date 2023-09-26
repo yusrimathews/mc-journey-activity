@@ -1,4 +1,5 @@
 import Postmonger from 'postmonger';
+import querystring from 'querystring';
 
 // Required environment variable
 const VUE_APP_URL = process.env.VUE_APP_URL.replace(/\/+$/, '');
@@ -153,6 +154,14 @@ export default {
     },
     async clickedNext () {
       const result = await this.v$.$validate();
+      const jbTokens = this.$store.state.jbTokens;
+
+      const tokenParams = querystring.stringify({
+        stackKey: jbTokens.stackKey,
+        eid: jbTokens.EID,
+        mid: jbTokens.MID,
+        uid: jbTokens.UID
+      });
 
       if (!result) {
         this.postmonger.trigger('ready');
@@ -177,13 +186,17 @@ export default {
             ...this.$store.state.jbActivity.arguments,
             execute: {
               ...this.$store.state.jbActivity.arguments.execute,
+              url: `${VUE_APP_URL}/execute?${tokenParams}`,
               inArguments: inArguments
             }
           },
           configurationArguments: {
             ...this.$store.state.jbActivity.configurationArguments,
             validate: {
-              url: `${VUE_APP_URL}/validate`
+              url: `${VUE_APP_URL}/validate?${tokenParams}`
+            },
+            publish: {
+              url: `${VUE_APP_URL}/publish?${tokenParams}`
             }
           }
         });

@@ -1,10 +1,22 @@
+const mongodb = require('../lib/mongodb');
 const logger = require('../lib/logger');
 
 module.exports = (req, res) => {
-  try {
-    logger.info('[publish.js] success :', req.body);
+  const mongodb_isEnabled = mongodb.isEnabled();
 
-    res.json({ success: true });
+  try {
+    logger.debug('[publish.js] success :', req.query, req.body);
+
+    if (mongodb_isEnabled) {
+      mongodb.insertDocuments('activity', 'publish', [{ ...req.query, ...req.body }])
+        .then((response) => {
+          logger.debug('[publish.js] mongodb success :', response);
+
+          res.json({ success: true });
+        });
+    } else {
+      res.json({ success: false });
+    }
   } catch (error) {
     logger.error('[publish.js] error :', error);
 

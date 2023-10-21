@@ -20,8 +20,7 @@ module.exports = async (req, res) => {
     const jbTrigger = jbTriggers[0];
     const jbTriggerEventDefinitionKey = jbTrigger.metaData.eventDefinitionKey;
 
-    let contactBindingError = false;
-    let contactBindingValues = [];
+    let contactBindingValues = [], contactBindingError = false, contactBindingErrors = [];
 
     if (jbActivity) {
       const jbInArguments = jbActivity.arguments.execute.inArguments;
@@ -45,6 +44,7 @@ module.exports = async (req, res) => {
 
         if (contactBindingValidation.test(value) && value.search(jbTriggerEventDefinitionKey) < 0) {
           contactBindingError = true;
+          contactBindingErrors.push(value);
         }
       });
     }
@@ -60,12 +60,13 @@ module.exports = async (req, res) => {
         activityObjectID: req.body.activityObjectID
       }
     } else if (contactBindingError) {
-      logger.error(`[validate.js] mid: ${req.query.mid} | contactBindingValues: ${JSON.stringify(contactBindingValues)} | jbTriggerEventDefinitionKey: ${jbTriggerEventDefinitionKey}`);
+      logger.error(`[validate.js] mid: ${req.query.mid} | contactBindingErrors: ${JSON.stringify(contactBindingErrors)}`);
+      logger.error(`[validate.js] jbTriggerEventDefinitionKey: ${jbTriggerEventDefinitionKey}`);
 
       statusCode = 400;
       resultOutcome = 'Validation Failed due to Contact Binding';
       resultCatch = {
-        contactBindingValues,
+        contactBindingErrors,
         jbTriggerEventDefinitionKey
       }
     } else {

@@ -13,9 +13,6 @@ module.exports = async (req, res) => {
 
     if (!req.query.mid) throw('Invalid Request - Missing Required Parameters');
 
-    statusCode = 200;
-    resultOutcome = 'Execution Success';
-
     const sfmcLogDE = sfmc.logDE(req.query.mid);
 
     if (sfmcLogDE.isEnabled) {
@@ -30,6 +27,9 @@ module.exports = async (req, res) => {
           logger.debug(`[execute.js] postDataExtensionRows: ${JSON.stringify(response)}`);
         });
     }
+
+    statusCode = 200;
+    resultOutcome = 'Execution Success';
   } catch (error) {
     logger.error(`[execute.js] catch: ${JSON.stringify(error)}`);
 

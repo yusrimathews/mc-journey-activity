@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
 
     if (jbActivity) {
       const jbInArguments = jbActivity.arguments.execute.inArguments;
+      // const jbInArguments = require('../src/data/jbInArguments');
 
       jbInArguments.forEach((argument) => {
         var contactBindingRegex = /\{\{(.*?)\}\}/g;

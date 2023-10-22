@@ -64,12 +64,7 @@ const json = {
           }
         }],
         outArguments: [{
-          request_id: {
-            dataType: 'text',
-            direction: 'out',
-            access: 'hidden'
-          },
-          activity_id: {
+          result: {
             dataType: 'text',
             direction: 'out',
             access: 'visible'

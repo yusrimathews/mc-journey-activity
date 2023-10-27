@@ -6,18 +6,9 @@ import runningModal from '@/components/runningModal.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {
-      path: '/',
-      component: configModal
-    },
-    {
-      path: '/hover',
-      component: runningHover
-    },
-    {
-      path: '/modal',
-      component: runningModal
-    }
+    { path: '/', component: configModal },
+    { path: '/hover', component: runningHover },
+    { path: '/modal', component: runningModal }
   ]
 });
 

@@ -10,6 +10,8 @@ const history = require('connect-history-api-fallback');
 
 // Optional environment variables
 const port = process.env.PORT || 8081;
+const env = process.env.NODE_ENV || 'local';
+const version = process.env.NODE_VERSION || '18.15.0';
 
 // Configure middleware & parsers
 app.use(cors());
@@ -37,6 +39,6 @@ app.listen(port, (error) => {
   if (error) {
     logger.error(`[app.js] catch: ${JSON.stringify(error)}`);
   } else {
-    logger.info(`[app.js] port: ${port}`);
+    logger.info(`[app.js] port: ${port} | node_env: ${env} | node_version: ${version}`);
   }
 });

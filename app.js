@@ -15,7 +15,11 @@ const version = process.env.NODE_VERSION || '18.15.0';
 
 // Configure middleware & parsers
 app.use(cors());
-app.use(helmet({ xFrameOptions: false }));
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: { 'frame-ancestors': ["'self'", "https://*.exacttarget.com/"] }
+  }
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

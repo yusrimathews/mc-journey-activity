@@ -1,12 +1,8 @@
-const mongodb = require('../lib/mongodb');
 const logger = require('../lib/logger');
 const sfmc = require('../lib/sfmc');
 
 module.exports = async (req, res) => {
-  const mongodbIsEnabled = mongodb.isEnabled();
-  const timestampUTC = new Date().toUTCString();
-
-  let statusCode, resultOutcome, resultCatch;
+  let statusCode, resultOutcome;
 
   try {
     logger.debug(`[validate.js] request: ${JSON.stringify({...req.query, ...req.body})}`);
@@ -56,20 +52,12 @@ module.exports = async (req, res) => {
 
       statusCode = 400;
       resultOutcome = 'Validation Failed due to invalid Activity ID';
-      resultCatch = {
-        jbActivities,
-        activityObjectID: req.body.activityObjectID
-      }
     } else if (contactBindingError) {
       logger.error(`[validate.js] mid: ${req.query.mid} | contactBindingErrors: ${JSON.stringify(contactBindingErrors)}`);
       logger.error(`[validate.js] jbTriggerEventDefinitionKey: ${jbTriggerEventDefinitionKey}`);
 
       statusCode = 400;
       resultOutcome = 'Validation Failed due to Contact Binding';
-      resultCatch = {
-        contactBindingErrors,
-        jbTriggerEventDefinitionKey
-      }
     } else {
       logger.debug(`[validate.js] mid: ${req.query.mid} | interactionId: ${req.body.interactionId} | activityObjectID: ${req.body.activityObjectID}`);
       logger.debug(`[validate.js] getJourney: ${JSON.stringify(sfmcGetJourney)}`);
@@ -82,24 +70,6 @@ module.exports = async (req, res) => {
 
     statusCode = 500;
     resultOutcome = 'Invalid Request';
-    resultCatch = error;
-  }
-
-  if (mongodbIsEnabled) {
-    mongodb.insertDocuments('activity', 'validate', [{
-      ...req.query,
-      ...req.body,
-      statusCode,
-      resultOutcome,
-      resultCatch,
-      timestamp: timestampUTC
-    }])
-      .then((response) => {
-        logger.debug(`[validate.js] mongodb: ${JSON.stringify(response)}`);
-      })
-      .catch((error) => {
-        logger.error(`[validate.js] mongodb: ${JSON.stringify(error)}`);
-      });
   }
 
   res.status(statusCode).json({ result: resultOutcome });

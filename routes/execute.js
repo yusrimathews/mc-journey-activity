@@ -1,12 +1,10 @@
-const mongodb = require('../lib/mongodb');
 const logger = require('../lib/logger');
 const sfmc = require('../lib/sfmc');
 
 module.exports = async (req, res) => {
-  const mongodbIsEnabled = mongodb.isEnabled();
   const timestampUTC = new Date().toUTCString();
 
-  let statusCode, resultOutcome, resultCatch;
+  let statusCode, resultOutcome;
 
   try {
     logger.debug(`[execute.js] request: ${JSON.stringify({...req.query, ...req.body})}`);
@@ -35,24 +33,6 @@ module.exports = async (req, res) => {
 
     statusCode = 500;
     resultOutcome = 'Invalid Request';
-    resultCatch = error;
-  }
-
-  if (mongodbIsEnabled) {
-    mongodb.insertDocuments('activity', 'execute', [{
-      ...req.query,
-      ...req.body,
-      statusCode,
-      resultOutcome,
-      resultCatch,
-      timestamp: timestampUTC
-    }])
-      .then((response) => {
-        logger.debug(`[execute.js] mongodb: ${JSON.stringify(response)}`);
-      })
-      .catch((error) => {
-        logger.error(`[execute.js] mongodb: ${JSON.stringify(error)}`);
-      });
   }
 
   res.status(statusCode).json({ result: resultOutcome });

@@ -4,22 +4,23 @@ const express = require('express');
 const app = express();
 const logger = require('./lib/logger');
 const cors = require('cors');
+const helmet = require('helmet');
+const { useTreblle } = require('treblle');
 const history = require('connect-history-api-fallback');
-const nocache = require('nocache');
 
 // Optional environment variables
 const port = process.env.PORT || 8081;
 
 // Configure middleware & parsers
 app.use(cors());
-app.use(history());
-app.use(nocache());
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(require('body-parser').raw({
-  type: 'application/jwt'
-}));
-app.disable('x-powered-by');
+
+useTreblle(app, {
+  projectId: process.env.TREBLLE_PROJECT,
+  apiKey: process.env.TREBLLE_KEY
+});
 
 // Configure server routes
 app.get('/config.json', require('./routes/config'));
@@ -28,6 +29,7 @@ app.post('/publish', require('./routes/publish'));
 app.post('/validate', require('./routes/validate'));
 
 // Configure client route
+app.use(history());
 app.use(express.static(`${__dirname}/dist/`));
 
 // Start server

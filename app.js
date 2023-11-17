@@ -17,7 +17,7 @@ const version = process.env.NODE_VERSION || '18.15.0';
 app.use(cors());
 app.use(helmet({
   contentSecurityPolicy: {
-    directives: { 'frame-ancestors': ["'self'", "https://*.exacttarget.com/"] }
+    directives: { 'frame-ancestors': ["'self'", "https://*.exacttarget.com/", "https://*.*.exacttarget.com/"] }
   }
 }));
 app.use(express.json());

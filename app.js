@@ -6,6 +6,7 @@ const logger = require('./lib/logger');
 const cors = require('cors');
 const helmet = require('helmet');
 const { useTreblle } = require('treblle');
+const { rateLimit } = require('express-rate-limit');
 const history = require('connect-history-api-fallback');
 
 // Optional environment variables
@@ -30,6 +31,15 @@ if ( TREBLLE_PROJECT && TREBLLE_KEY ) {
     apiKey: TREBLLE_KEY
   });
 }
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000,
+	max: 15000,
+	standardHeaders: false,
+	legacyHeaders: true
+});
+
+app.use(limiter);
 
 // Configure server routes
 app.get('/config.json', require('./routes/config'));

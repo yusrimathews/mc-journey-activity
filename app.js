@@ -8,9 +8,6 @@ const helmet = require('helmet');
 const { useTreblle } = require('treblle');
 const history = require('connect-history-api-fallback');
 
-// Required environment variables
-const VUE_APP_URL = process.env.VUE_APP_URL.replace(/\/+$/, '');
-
 // Optional environment variables
 const PORT = process.env.PORT || 8081;
 const NOVE_ENV = process.env.NODE_ENV || 'local';
@@ -21,12 +18,7 @@ const TREBLLE_KEY = process.env.TREBLLE_KEY;
 // Configure middleware & parsers
 app.use(cors());
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      frameAncestors: ['https://*.*.exacttarget.com'],
-      frameSrc: [VUE_APP_URL]
-    }
-  },
+  contentSecurityPolicy: false,
   frameguard: false
 }));
 app.use(express.json());

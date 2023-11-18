@@ -20,6 +20,7 @@ const TREBLLE_KEY = process.env.TREBLLE_KEY;
 app.use(cors());
 app.use(helmet({
   contentSecurityPolicy: false,
+  crossOriginResourcePolicy: false,
   xFrameOptions: false
 }));
 app.use(express.json());

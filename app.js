@@ -20,7 +20,7 @@ const TREBLLE_KEY = process.env.TREBLLE_KEY;
 app.use(cors());
 app.use(helmet({
   contentSecurityPolicy: {
-    directives: { "frame-ancestors": ["exacttarget.com"] }
+    directives: { "frame-ancestors": ["https://mc.*.exacttarget.com"] }
   },
   xFrameOptions: { action: "deny" },
   crossOriginEmbedderPolicy: false

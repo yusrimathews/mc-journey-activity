@@ -19,6 +19,9 @@ const TREBLLE_KEY = process.env.TREBLLE_KEY;
 // Configure middleware & parsers
 app.use(cors());
 app.use(helmet({
+  contentSecurityPolicy: {
+    directives: { "frame-ancestors": ["exacttarget.com"] }
+  },
   xFrameOptions: { action: "deny" },
   crossOriginEmbedderPolicy: false
 }));

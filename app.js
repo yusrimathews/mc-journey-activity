@@ -9,9 +9,9 @@ const { useTreblle } = require('treblle');
 const history = require('connect-history-api-fallback');
 
 // Optional environment variables
-const port = process.env.PORT || 8081;
-const env = process.env.NODE_ENV || 'local';
-const version = process.env.NODE_VERSION || '18.15.0';
+const PORT = process.env.PORT || 8081;
+const NOVE_ENV = process.env.NODE_ENV || 'local';
+const NODE_VERSION = process.env.NODE_VERSION || '18.15.0';
 
 // Configure middleware & parsers
 app.use(cors());
@@ -39,10 +39,10 @@ app.use(history());
 app.use(express.static(`${__dirname}/dist/`));
 
 // Start server
-app.listen(port, (error) => {
+app.listen(PORT, (error) => {
   if (error) {
     logger.error(`[app.js] catch: ${JSON.stringify(error)}`);
   } else {
-    logger.info(`[app.js] port: ${port} | node_env: ${env} | node_version: ${version}`);
+    logger.info(`[app.js] port: ${PORT} | node_env: ${NOVE_ENV} | node_version: ${NODE_VERSION}`);
   }
 });

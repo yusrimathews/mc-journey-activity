@@ -19,7 +19,8 @@ const TREBLLE_KEY = process.env.TREBLLE_KEY;
 // Configure middleware & parsers
 app.use(cors());
 app.use(helmet({
-  xFrameOptions: { action: "deny" }
+  xFrameOptions: { action: "deny" },
+  crossOriginEmbedderPolicy: false
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

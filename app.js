@@ -12,6 +12,8 @@ const history = require('connect-history-api-fallback');
 const PORT = process.env.PORT || 8081;
 const NOVE_ENV = process.env.NODE_ENV || 'local';
 const NODE_VERSION = process.env.NODE_VERSION || '18.15.0';
+const TREBLLE_PROJECT = process.env.TREBLLE_PROJECT;
+const TREBLLE_KEY = process.env.TREBLLE_KEY;
 
 // Configure middleware & parsers
 app.use(cors());
@@ -23,10 +25,12 @@ app.use(helmet({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-useTreblle(app, {
-  projectId: process.env.TREBLLE_PROJECT,
-  apiKey: process.env.TREBLLE_KEY
-});
+if ( TREBLLE_PROJECT && TREBLLE_KEY ) {
+  useTreblle(app, {
+    projectId: TREBLLE_PROJECT,
+    apiKey: TREBLLE_KEY
+  });
+}
 
 // Configure server routes
 app.get('/config.json', require('./routes/config'));

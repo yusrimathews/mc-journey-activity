@@ -18,16 +18,11 @@ const TREBLLE_KEY = process.env.TREBLLE_KEY;
 
 // Configure middleware & parsers
 app.use(cors());
-app.use(helmet({
-  xFrameOptions: { action: "deny" },
-  contentSecurityPolicy: {
-    directives: { "frame-ancestors": ["https://mc.*.exacttarget.com"] }
-  }
-}));
+app.use(helmet({ xFrameOptions: false }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
-if ( TREBLLE_PROJECT && TREBLLE_KEY ) {
+if (TREBLLE_PROJECT && TREBLLE_KEY) {
   useTreblle(app, {
     projectId: TREBLLE_PROJECT,
     apiKey: TREBLLE_KEY

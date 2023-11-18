@@ -72,5 +72,8 @@ module.exports = async (req, res) => {
     resultOutcome = 'Invalid Request';
   }
 
-  res.status(statusCode).json({ result: resultOutcome });
+  res
+    .set({ 'Allow': 'POST' })
+    .status(statusCode)
+    .json({ result: resultOutcome });
 }

@@ -7,9 +7,9 @@ module.exports = async (req, res) => {
   try {
     logger.debug(`[validate.js] request: ${JSON.stringify({...req.query, ...req.body})}`);
 
-    if (!req.query.mid || !req.body.interactionId || !req.body.activityObjectID) throw('Invalid Request - Missing Required Parameters');
+    if (!req.query.mid || !req.body.originalDefinitionId || !req.body.activityObjectID) throw('Invalid Request - Missing Required Parameters');
 
-    const sfmcGetJourney = await sfmc.getJourney(req.query.mid, req.body.interactionId);
+    const sfmcGetJourney = await sfmc.getJourney(req.query.mid, req.body.originalDefinitionId);
     const jbActivities = sfmcGetJourney.activities;
     const jbActivity = jbActivities ? jbActivities.find(activity => activity.id === req.body.activityObjectID) : false;
     const jbTriggers = sfmcGetJourney.triggers;

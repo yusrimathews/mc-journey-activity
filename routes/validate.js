@@ -2,7 +2,7 @@ const logger = require('../lib/logger');
 const sfmc = require('../lib/sfmc');
 
 module.exports = async (req, res) => {
-  let statusCode, resultOutcome;
+  let statusCode, jsonResult;
 
   try {
     if (!req.query.mid || !req.body.originalDefinitionId || !req.body.activityObjectID) throw('Invalid Request - Missing Required Parameters');
@@ -49,29 +49,26 @@ module.exports = async (req, res) => {
       // logger.error(`[validate.js] jbActivities: ${JSON.stringify(jbActivities)}`);
 
       statusCode = 400;
-      resultOutcome = 'Validation Failed due to invalid Activity ID';
+      jsonResult = 'Validation Failed due to invalid Activity ID';
     } else if (contactBindingError) {
       logger.error(`[validate.js] mid: ${req.query.mid} | contactBindingErrors: ${JSON.stringify(contactBindingErrors)}`);
       // logger.error(`[validate.js] jbTriggerEventDefinitionKey: ${jbTriggerEventDefinitionKey}`);
 
       statusCode = 400;
-      resultOutcome = 'Validation Failed due to Contact Binding';
+      jsonResult = 'Validation Failed due to Contact Binding';
     } else {
       logger.debug(`[validate.js] mid: ${req.query.mid} | originalDefinitionId: ${req.body.originalDefinitionId} | activityObjectID: ${req.body.activityObjectID}`);
       // logger.debug(`[validate.js] getJourney: ${JSON.stringify(sfmcGetJourney)}`);
 
       statusCode = 200;
-      resultOutcome = 'Validation Success';
+      jsonResult = 'Validation Success';
     }
   } catch (error) {
     logger.error(`[validate.js] catch: ${JSON.stringify(error)}`);
 
     statusCode = 500;
-    resultOutcome = 'Invalid Request';
+    jsonResult = 'Invalid Request';
   }
 
-  res
-    .set({ 'Allow': 'POST' })
-    .status(statusCode)
-    .json({ result: resultOutcome });
+  res.status(statusCode).json({ result: jsonResult });
 }

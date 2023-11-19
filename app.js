@@ -5,8 +5,7 @@ const app = express();
 const logger = require('./lib/logger');
 const cors = require('cors');
 const helmet = require('helmet');
-const { useTreblle } = require('treblle');
-const { rateLimit } = require('express-rate-limit');
+const treblle = require('@treblle/express');
 const history = require('connect-history-api-fallback');
 
 // Optional environment variables
@@ -24,29 +23,19 @@ app.use(helmet({
   xFrameOptions: false
 }));
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
 
 if (TREBLLE_PROJECT && TREBLLE_KEY) {
-  useTreblle(app, {
-    projectId: TREBLLE_PROJECT,
-    apiKey: TREBLLE_KEY
-  });
+  app.use(['/validate', '/publish', '/execute'], treblle({
+    apiKey: TREBLLE_KEY,
+    projectId: TREBLLE_PROJECT
+  }));
 }
-
-const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000,
-	max: 15000,
-	standardHeaders: false,
-	legacyHeaders: true
-});
-
-app.use(limiter);
 
 // Configure server routes
 app.get('/config.json', require('./routes/config'));
-app.post('/execute', require('./routes/execute'));
-app.post('/publish', require('./routes/publish'));
 app.post('/validate', require('./routes/validate'));
+app.post('/publish', require('./routes/publish'));
+app.post('/execute', require('./routes/execute'));
 
 // Configure client route
 app.use(history());

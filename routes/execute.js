@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
 
     const sfmcLogDE = sfmc.logDE(req.query.mid);
 
-    if (sfmcLogDE.isEnabled) {
+    if (sfmcLogDE.externalKey) {
       await sfmc.postDataExtensionRows(req.query.mid, sfmcLogDE.externalKey, [{
         ...req.query,
         ...req.body,

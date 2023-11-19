@@ -4,7 +4,7 @@ module.exports = (req, res) => {
   let statusCode, resultOutcome;
 
   try {
-    logger.debug(`[publish.js] request: ${JSON.stringify({...req.query, ...req.body})}`);
+    logger.debug(`[publish.js] mid: ${req.query.mid} | originalDefinitionId: ${req.body.originalDefinitionId} | activityObjectID: ${req.body.activityObjectID}`);
 
     statusCode = 200;
     resultOutcome = 'Publish Success';

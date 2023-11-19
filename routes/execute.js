@@ -7,8 +7,6 @@ module.exports = async (req, res) => {
   let statusCode, resultOutcome;
 
   try {
-    logger.debug(`[execute.js] request: ${JSON.stringify({...req.query, ...req.body})}`);
-
     if (!req.query.mid) throw('Invalid Request - Missing Required Parameters');
 
     const sfmcLogDE = sfmc.logDE(req.query.mid);
@@ -21,10 +19,11 @@ module.exports = async (req, res) => {
         inArguments: JSON.stringify(req.body.inArguments)
       }])
         .then((response) => {
-          logger.debug(`[execute.js] mid: ${req.query.mid} | externalKey: ${sfmcLogDE.externalKey}`);
           logger.debug(`[execute.js] postDataExtensionRows: ${JSON.stringify(response)}`);
         });
     }
+
+    logger.debug(`[execute.js] mid: ${req.query.mid} | originalDefinitionId: ${req.body.originalDefinitionId} | activityObjectID: ${req.body.activityObjectID}`);
 
     statusCode = 200;
     resultOutcome = 'Execution Success';

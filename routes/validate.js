@@ -5,8 +5,6 @@ module.exports = async (req, res) => {
   let statusCode, resultOutcome;
 
   try {
-    logger.debug(`[validate.js] request: ${JSON.stringify({...req.query, ...req.body})}`);
-
     if (!req.query.mid || !req.body.originalDefinitionId || !req.body.activityObjectID) throw('Invalid Request - Missing Required Parameters');
 
     const sfmcGetJourney = await sfmc.getJourney(req.query.mid, req.body.originalDefinitionId);
@@ -48,19 +46,19 @@ module.exports = async (req, res) => {
 
     if (!jbActivity) {
       logger.error(`[validate.js] mid: ${req.query.mid} | invalidActivityObjectID: ${req.body.activityObjectID}`);
-      logger.error(`[validate.js] jbActivities: ${JSON.stringify(jbActivities)}`);
+      // logger.error(`[validate.js] jbActivities: ${JSON.stringify(jbActivities)}`);
 
       statusCode = 400;
       resultOutcome = 'Validation Failed due to invalid Activity ID';
     } else if (contactBindingError) {
       logger.error(`[validate.js] mid: ${req.query.mid} | contactBindingErrors: ${JSON.stringify(contactBindingErrors)}`);
-      logger.error(`[validate.js] jbTriggerEventDefinitionKey: ${jbTriggerEventDefinitionKey}`);
+      // logger.error(`[validate.js] jbTriggerEventDefinitionKey: ${jbTriggerEventDefinitionKey}`);
 
       statusCode = 400;
       resultOutcome = 'Validation Failed due to Contact Binding';
     } else {
-      logger.debug(`[validate.js] mid: ${req.query.mid} | interactionId: ${req.body.interactionId} | activityObjectID: ${req.body.activityObjectID}`);
-      logger.debug(`[validate.js] getJourney: ${JSON.stringify(sfmcGetJourney)}`);
+      logger.debug(`[validate.js] mid: ${req.query.mid} | originalDefinitionId: ${req.body.originalDefinitionId} | activityObjectID: ${req.body.activityObjectID}`);
+      // logger.debug(`[validate.js] getJourney: ${JSON.stringify(sfmcGetJourney)}`);
 
       statusCode = 200;
       resultOutcome = 'Validation Success';

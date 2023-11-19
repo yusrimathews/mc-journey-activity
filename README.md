@@ -35,7 +35,7 @@ npm start
 ### Environment Variables:
 | Variable | Description | Required | Default or Sample |
 |---|---|---|---|
-| NODE_ENV | Environment identifier used for conditional logic. | ❌ | local |
+| NODE_ENV | Environment identifier used for conditional logic. | ❌ | development |
 | NODE_VERSION | Required depending on hosting. | 🤔 | 18.15.0 |
 | PORT | Express server port. | ❌ | 8081 |
 | VUE_APP_URL | Express server URL. | ✅ | http://localhost:8081/ |

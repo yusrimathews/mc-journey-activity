@@ -11,7 +11,7 @@ const history = require('connect-history-api-fallback');
 
 // Optional environment variables
 const PORT = process.env.PORT || 8081;
-const NOVE_ENV = process.env.NODE_ENV || 'local';
+const NOVE_ENV = process.env.NODE_ENV || 'development';
 const NODE_VERSION = process.env.NODE_VERSION || '18.15.0';
 const TREBLLE_PROJECT = process.env.TREBLLE_PROJECT;
 const TREBLLE_KEY = process.env.TREBLLE_KEY;

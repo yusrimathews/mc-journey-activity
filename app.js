@@ -10,7 +10,7 @@ const history = require('connect-history-api-fallback');
 
 // Optional environment variables
 const PORT = process.env.PORT || 8081;
-const NOVE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || 'local';
 const NODE_VERSION = process.env.NODE_VERSION || '18.15.0';
 const TREBLLE_PROJECT = process.env.TREBLLE_PROJECT;
 const TREBLLE_KEY = process.env.TREBLLE_KEY;
@@ -46,6 +46,6 @@ app.listen(PORT, (error) => {
   if (error) {
     logger.error(`[app.js] catch: ${JSON.stringify(error)}`);
   } else {
-    logger.info(`[app.js] port: ${PORT} | node_env: ${NOVE_ENV} | node_version: ${NODE_VERSION}`);
+    logger.info(`[app.js] port: ${PORT} | node_env: ${NODE_ENV} | node_version: ${NODE_VERSION}`);
   }
 });

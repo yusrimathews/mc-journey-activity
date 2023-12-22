@@ -118,7 +118,7 @@ In Marketing Cloud, go to *Contact Builder | Data Extensions*:
 ## Treblle Setup
 [Treblle](https://www.treblle.com/) makes it super easy (and free!) to understand what's going on with your API's and the apps that use them.
 
-> This is optional but required to see the requests made by Marketing Cloud to validate, publish and execute.
+> This is **OPTIONAL** but useful to see the requests made by Marketing Cloud to validate, publish and execute activity requests.
 
 ### Create a Project:
 From the Treblle dashboard, click on [create a new project](https://app.treblle.com/projects/create):

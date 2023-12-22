@@ -62,7 +62,7 @@ import customActivity from '@/mixins/customActivity';
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 
-const NODE_ENV = process.env.NODE_ENV || 'local';
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 export default {
   name: 'Main',
@@ -72,7 +72,7 @@ export default {
   },
   data () {
     return {
-      isDevelopment: NODE_ENV === 'local'
+      isDevelopment: NODE_ENV === 'development'
     }
   },
   computed: {
